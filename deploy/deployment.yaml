@@ -27,7 +27,10 @@ spec:
         - containerPort: 3000
         env:
         - name: DATABASE_URL
-          value: "postgres://b7932cd6587f0b643e6d318474e5ac37550065b0cfc8ce25f68815397b7af860:sk_H74Oe69zft6DeuXOlSL73@db.prisma.io:5432/postgres?sslmode=require"
+          valueFrom:
+          secretKeyRef:
+            name: nextjs-docker-test-secrets
+            key: DATABASE_URL
         volumeMounts:
         - name: config-volume
           mountPath: /configs/
