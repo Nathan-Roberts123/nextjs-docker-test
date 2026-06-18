@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: nextjs-docker-test
+  labels:
+    app: nextjs-docker-test
+spec:
+  type: ClusterIP
+  selector:
+    app: nextjs-docker-test
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 3000

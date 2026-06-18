@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-docker-test
+  labels:
+    app: nextjs-docker-test
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: nextjs-docker-test
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: nextjs-docker-test
+    spec:
+      containers:
+      - name: nextjs-docker-test
+        image: nextjs-docker-test
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DATABASE_URL
+          value: "postgres://b7932cd6587f0b643e6d318474e5ac37550065b0cfc8ce25f68815397b7af860:sk_H74Oe69zft6DeuXOlSL73@db.prisma.io:5432/postgres?sslmode=require"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /configs/
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nextjs-docker-test
