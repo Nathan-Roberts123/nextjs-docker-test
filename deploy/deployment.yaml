@@ -21,20 +21,23 @@ spec:
         app: nextjs-docker-test
     spec:
       containers:
-      - name: nextjs-docker-test
-        image: docker.io/nsindiso/nextjs-docker-test
-        ports:
-        - containerPort: 3000
-        env:
-        - name: DATABASE_URL
-          valueFrom:
-          secretKeyRef:
-            name: nextjs-docker-test-secrets
-            key: DATABASE_URL
-        volumeMounts:
-        - name: config-volume
-          mountPath: /configs/
+        - name: nextjs-docker-test
+          image: docker.io/nsindiso/nextjs-docker-test
+          ports:
+            - containerPort: 3000
+
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: nextjs-docker-test-secrets
+                  key: DATABASE_URL
+
+          volumeMounts:
+            - name: config-volume
+              mountPath: /configs/
+
       volumes:
-      - name: config-volume
-        configMap:
-          name: nextjs-docker-test
+        - name: config-volume
+          configMap:
+            name: nextjs-docker-test
