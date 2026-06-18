@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: nextjs-docker-test
-        image: nextjs-docker-test
+        image: docker.io/nsindiso/nextjs-docker-test
         ports:
         - containerPort: 3000
         env:
